@@ -14,22 +14,22 @@ public class ImdbApi {
 	
 	public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
 		
-		//HttpRequest cria o corpo da requisição
+		//HttpRequest cria o corpo da requisiÃ§Ã£o
 		HttpRequest request = HttpRequest
 	            .newBuilder()
-	            .uri(URI.create("https://imdb-api.com/pt-BR/API/Top250Movies/k_d4347co0"))
+	            .uri(URI.create("https://imdb-api.com/pt-BR/API/Top250Movies/<chaveIMDB>"))
 	            .header("Content-Type", "application/json")
 	            .timeout(Duration.ofMinutes(1))
 	            .GET()
 	            .build();
 		
-		//HttpClient executa a requisição ja criada
+		//HttpClient executa a requisiÃ§Ã£o ja criada
 		HttpClient httpClient = HttpClient.newBuilder()
 				.connectTimeout(Duration.ofMinutes(1))
 				.followRedirects(Redirect.NORMAL)
 				.build();
 		
-		//HttpResponse é o retorno da HttpCliente apos fazer a requisicao
+		//HttpResponse Ã© o retorno da HttpCliente apos fazer a requisicao
 		HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
 		
 		System.out.println(response.body());
