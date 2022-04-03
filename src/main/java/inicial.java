@@ -10,7 +10,7 @@ public class inicial {
 	public static void main(String[] args) {
 		
 		try {
-			String json = ImdbApi.getImbdJson("k_d4347co0");
+			String json = ImdbApi.getImbdJson("<Sua Chave>");
 			
 			List<String> filmesString = ParsingFilmes.parse(json);
 			
