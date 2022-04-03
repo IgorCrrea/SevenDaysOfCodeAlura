@@ -5,22 +5,28 @@ import java.util.List;
 
 public class ServiceFilme {
 	
-	public static List<Filme> createFilme(List<String> lista){
-		List<Filme> listaFilme = new ArrayList<Filme>();
+	public static List<FilmeRecord> createFilme(List<String> lista){
 		
+		List<FilmeRecord> listaFilme = new ArrayList<FilmeRecord>();
+		
+		//percorre todas as linhas da lista passadas pelo construtor
 		lista.forEach(f -> {
-			String[] atributo = f.split("\":\"");
-			Filme filme = new Filme();
-			filme.setId(atributo[1].split("\"")[0]);
-			filme.setRank(atributo[2].split("\"")[0]);
-			filme.setTitle(atributo[3].split("\"")[0]);
-			filme.setFullTitle(atributo[4].split("\"")[0]);
-			filme.setYear(atributo[5].split("\"")[0]);
-			filme.setImage(atributo[6].split("\"")[0]);
-			filme.setCrew(atributo[7].split("\"")[0]);
-			filme.setImDbRating(atributo[8].split("\"")[0]);
-			filme.setImDbRatingCount(atributo[9].split("\"")[0]);
 			
+			//regex passado direto no metodo split, ele faz o split sempre que houver a string entre os parenteses -> (":")
+			String[] atributo = f.split("\":\"");
+			
+			FilmeRecord filme = new FilmeRecord(
+				//pega cada atributo e remove o que sebrou, pegando apenas a primeira parte da String
+				atributo[1].split("\"")[0],
+				atributo[2].split("\"")[0],
+				atributo[3].split("\"")[0],
+				atributo[4].split("\"")[0],
+				atributo[5].split("\"")[0],
+				atributo[6].split("\"")[0],
+				atributo[7].split("\"")[0],
+				atributo[8].split("\"")[0],
+				atributo[9].split("\"")[0]
+			);
 			listaFilme.add(filme);
 		});
 		

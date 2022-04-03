@@ -1,5 +1,6 @@
 package br.com.igorcrrea.sevendayscode.model;
 
+@Deprecated
 public class Filme {
 
 	private String id;
