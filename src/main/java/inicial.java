@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Scanner;
 
 import br.com.igorcrrea.sevendayscode.api.ImdbApi;
 import br.com.igorcrrea.sevendayscode.model.FilmeRecord;
@@ -10,18 +11,20 @@ public class inicial {
 
 	public static void main(String[] args) {
 		
-		try {
-			String json = ImdbApi.getImbdJson("<Seu Codigo>");
+		try (Scanner scanner = new Scanner(System.in);) {
 			
-			List<String> filmesString = ParsingFilmes.parse(json);
+			System.out.println("Digite seu codigo do IMDB:");
+			String entrada = scanner.next();
 			
-			List<FilmeRecord> filmesObj = ServiceFilme.createFilme(filmesString);
+			String json = ImdbApi.getImbdJson(entrada);
 			
-			filmesObj.forEach(filme -> {
-				System.out.println(filme);
-			});
+			List<String> filmesJson = ParsingFilmes.parse(json);
 			
-			HTMLGenerator.gerar(filmesObj);
+			List<FilmeRecord> filmes = ServiceFilme.createFilme(filmesJson);
+			
+			filmes.forEach(System.out::println);
+			
+			HTMLGenerator.gerar(filmes);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
