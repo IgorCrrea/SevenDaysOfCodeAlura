@@ -2,6 +2,7 @@ import java.util.List;
 
 import br.com.igorcrrea.sevendayscode.api.ImdbApi;
 import br.com.igorcrrea.sevendayscode.model.FilmeRecord;
+import br.com.igorcrrea.sevendayscode.model.HTMLGenerator;
 import br.com.igorcrrea.sevendayscode.model.ParsingFilmes;
 import br.com.igorcrrea.sevendayscode.model.ServiceFilme;
 
@@ -19,6 +20,8 @@ public class inicial {
 			filmesObj.forEach(filme -> {
 				System.out.println(filme);
 			});
+			
+			HTMLGenerator.gerar(filmesObj);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
