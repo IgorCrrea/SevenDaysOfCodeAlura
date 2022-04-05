@@ -1,5 +1,6 @@
 package br.com.igorcrrea.sevendayscode.model;
 
+import br.com.igorcrrea.sevendayscode.interfaces.Content;
 
 //Record eh usado para classes que serao so como DTO (uma classe apenas com getters, setters e construtores
 //todos seus atributos são private final, ou seja, sao imutaveis
@@ -16,7 +17,7 @@ public record FilmeRecord(
 		String image,
 		String crew,
 		Double imDbRating,
-		Double imDbRatingCount) {
+		Double imDbRatingCount) implements Content {
 	
 	public FilmeRecord(
 			String id,

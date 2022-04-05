@@ -5,7 +5,6 @@ import br.com.igorcrrea.sevendayscode.api.ImdbApi;
 import br.com.igorcrrea.sevendayscode.model.FilmeRecord;
 import br.com.igorcrrea.sevendayscode.model.HTMLGenerator;
 import br.com.igorcrrea.sevendayscode.model.ParsingFilmes;
-import br.com.igorcrrea.sevendayscode.model.ServiceFilme;
 
 public class inicial {
 
@@ -13,19 +12,16 @@ public class inicial {
 		
 		try (Scanner scanner = new Scanner(System.in);) {
 			
+			//entrada da chave
 			System.out.println("Digite seu codigo do IMDB:");
 			String entrada = scanner.next();
 			
 			String json = ImdbApi.getImbdJson(entrada);
+			List<FilmeRecord> filmesJson = new ParsingFilmes().parse(json);
+			//filmesJson.forEach(System.out::println);
+			HTMLGenerator.gerar(filmesJson);
 			
-			List<String> filmesJson = ParsingFilmes.parse(json);
-			
-			List<FilmeRecord> filmes = ServiceFilme.createFilme(filmesJson);
-			
-			filmes.forEach(System.out::println);
-			
-			HTMLGenerator.gerar(filmes);
-			
+			System.out.println("Finalizado");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

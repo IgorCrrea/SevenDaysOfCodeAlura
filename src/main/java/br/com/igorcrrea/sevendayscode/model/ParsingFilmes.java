@@ -3,32 +3,39 @@ package br.com.igorcrrea.sevendayscode.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParsingFilmes {
+import br.com.igorcrrea.sevendayscode.interfaces.JsonParser;
+
+public class ParsingFilmes implements JsonParser {
 	
-	public static List<String> parse(String json) {
+	public List<FilmeRecord> parse(String json) {
 		
-		List<String> lista = new ArrayList<String>();
-		
-		// faz o parsing do json inteiro deixando apesas o conteudo de dentro dos colchetes
-		Integer firstBracket = json.indexOf("[")+1;
-		Integer lastBracket = json.indexOf("]");
-		String parse = json.substring(firstBracket, lastBracket);
-		
-		//separa cada linha objeto json
-		String[] split = parse.split("}");
-		
-		//remove a virgula e chaves que ficaram junto com o objeto
-		for (String filme : split) {
-			
-			if (filme.charAt(0) == ',') {
-				filme = filme.replaceFirst(",", "");
-			}
-			filme = filme.substring(1);
-			
-			lista.add(filme);
-		}
-		
-		return lista;
+		List<String> lista = this.ListaDeString(json);
+
+		List<FilmeRecord> listaFilme = new ArrayList<FilmeRecord>();
+
+		// percorre todas as linhas da lista passadas pelo construtor
+		lista.forEach(f -> {
+
+			// regex passado direto no metodo split, ele faz o split sempre que houver a
+			// string entre os parenteses -> (":")
+			String[] atributo = f.split("\":\"");
+
+			FilmeRecord filme = new FilmeRecord(
+					// pega cada atributo e remove o que sebrou, pegando apenas a primeira parte da
+					// String
+					atributo[1].split("\"")[0],
+					atributo[2].split("\"")[0],
+					atributo[3].split("\"")[0],
+					atributo[4].split("\"")[0],
+					atributo[5].split("\"")[0],
+					atributo[6].split("\"")[0],
+					atributo[7].split("\"")[0],
+					atributo[8].split("\"")[0],
+					atributo[9].split("\"")[0]);
+			listaFilme.add(filme);
+		});
+
+		return listaFilme;
 	}
 
 }

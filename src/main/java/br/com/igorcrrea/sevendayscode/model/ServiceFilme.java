@@ -3,6 +3,7 @@ package br.com.igorcrrea.sevendayscode.model;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class ServiceFilme {
 	
 	public static List<FilmeRecord> createFilme(List<String> lista){
