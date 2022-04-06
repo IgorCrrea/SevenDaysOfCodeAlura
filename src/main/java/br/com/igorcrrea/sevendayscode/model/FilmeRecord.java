@@ -17,7 +17,7 @@ public record FilmeRecord(
 		String image,
 		String crew,
 		Double imDbRating,
-		Double imDbRatingCount) implements Content {
+		Double imDbRatingCount) implements Content, Comparable<FilmeRecord>{
 	
 	public FilmeRecord(
 			String id,
@@ -35,6 +35,11 @@ public record FilmeRecord(
 	@Override
 	public String toString() {
 		return rank+" | "+fullTitle+" | "+imDbRating;
+	}
+
+	@Override
+	public int compareTo(FilmeRecord outro) {
+		return this.rank().compareTo(outro.rank());
 	}
 
 }
